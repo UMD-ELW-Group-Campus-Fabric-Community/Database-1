@@ -37,5 +37,18 @@ CREATE TABLE IF NOT EXISTS Program_Information(
     program_website VARCHAR(50) NOT NULL,
     program_focus TEXT [] NOT NULL,
     program_created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    program_updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+    program_updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    department_id INTEGER NOT NULL,
+    FOREIGN KEY (department_id) REFERENCES Department(department_id)
+);
+
+-- Table: Article
+CREATE TABLE IF NOT EXISTS Articles(
+    article_id SERIAL PRIMARY KEY,
+    article_title VARCHAR(50) NOT NULL,
+    article_content TEXT NOT NULL,
+    article_created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    article_updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User_Information(user_id)
 );
