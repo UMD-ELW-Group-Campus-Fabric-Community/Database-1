@@ -1,0 +1,10 @@
+FROM postgres:12
+
+
+WORKDIR /usr/src/app
+COPY ./sql/*.sql ./sql
+
+RUN for f in sql/*.sql; do \
+        psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -f  $f; \
+        echo $f; \
+    done
