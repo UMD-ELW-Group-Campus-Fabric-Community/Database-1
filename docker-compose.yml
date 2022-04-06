@@ -11,7 +11,7 @@ services:
     links:
       - db
     environment:
-      - HOST_PORT=1433
+      - HOST_PORT=8000
       - DB_HOST=db
       - DB_PORT=5432
       - DB_USER=postgres

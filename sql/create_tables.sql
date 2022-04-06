@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS Organization(
 --       This is a security risk. Do not use this for production.
 CREATE TABLE IF NOT EXISTS User_Information(
     user_id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
+    user_fname VARCHAR(50) NOT NULL,
+    user_lname VARCHAR(50) NOT NULL,
     user_password VARCHAR(50) NOT NULL,
     user_email VARCHAR(50) NOT NULL,
     user_phone VARCHAR(50) NOT NULL,
@@ -51,4 +52,50 @@ CREATE TABLE IF NOT EXISTS Articles(
     article_updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
     user_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User_Information(user_id)
+);
+
+-- View: Program Info
+CREATE OR REPLACE VIEW vprogram_details AS(
+    SELECT
+        pri.program_id,
+        pri.program_name,
+        pri.program_description,
+        pri.program_website,
+        pri.program_focus,
+        pri.program_created_at,
+        pri.program_updated_at,
+        d.department_id,
+        d.department_name,
+        o.organization_id,
+        o.organization_name,
+        o.organization_website
+    FROM
+        Program_Information AS pri 
+    INNER JOIN
+        Department AS d
+        ON pri.department_id = d.department_id
+    INNER JOIN
+        Organization AS o
+        ON o.organization_id = d.organization_id
+);
+
+-- Views: View Articles
+CREATE OR REPLACE VIEW varticles AS (
+    SELECT 
+        u.user_id,
+        u.user_fname,
+        u.user_lname,
+        a.article_id,
+        a.article_title,
+        a.article_content,
+        a.article_created_at,
+        a.article_updated_at,
+        o.organization_id,
+        o.organization_name,
+        o.organization_website
+    FROM Articles AS a
+    INNER JOIN User_Information AS u
+        ON a.user_id = u.user_id
+    INNER JOIN Organization AS o
+        ON u.organization_id = o.organization_id
 );
