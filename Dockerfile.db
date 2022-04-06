@@ -1,0 +1,3 @@
+FROM postgres:12
+
+# Login to postgres db and create new user/password

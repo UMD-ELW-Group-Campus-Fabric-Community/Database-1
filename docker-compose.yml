@@ -1,19 +1,40 @@
 version: '3.7'
 
 services:
-  db:
-    image: postgres:12
+  database-api:
+    image: node:latest
+    container_name: database-api
     restart: always
     build: 
-      context: .
-      dockerfile: Dockerfile.dev
-    env_file:
-      - .env
+      context: ./
+      dockerfile: Dockerfile.server
+    links:
+      - db
     environment:
-      - POSTGRES_USER=${PUSER}
-      - POSTGRES_PASSWORD=${PPASS}
-      - POSTGRES_DB=${PDB}
-      - POSTGRES_HOST=${PHOST}
+      - HOST_PORT=1433
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASS=post1234
+      - DB_NAME=wcfc_db
+
+    ports:
+      - "1433:8000"
+    
+
+  db:
+    image: postgres:12
+    container_name: db
+    restart: always
+    build: 
+      context: ./
+      dockerfile: Dockerfile.db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=post1234
+      - POSTGRES_DB=wcfc_db
+      - DB_USER=admin
+      - DB_PASS=post1234
     logging:
       options:
         max-size: '10m'
@@ -21,12 +42,12 @@ services:
     volumes:
       # Copy SQL files to the container at build time
       - ./sql/:/docker-entrypoint-initdb.d/
-      
-    ports:
-      - "$PHOST:5432:5432"
-    networks:
-      - default
-      
-networks:
-  default:
-    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local
+  pgconf:
+    driver: local
+  pglog: 
+    driver: local
+  
