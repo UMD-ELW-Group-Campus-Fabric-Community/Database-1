@@ -1,19 +1,18 @@
-const  { Client } = require('pg');
+const  { Pool } = require('pg');
 const config = require('../config/config');
+const pool = new Pool(config);
+await pool.connect();
 
 
 const query = async(sql, params) => {
-    try{
-        const client = new Client(config);
-        const connection = await client.connect();
-        const result = await client.query(sql, params);
-        
-        return result.rows;
-    }
-    catch(err){
-        console.log(err);
-        return err;
-    }
+    return new Promise((resolve, reject) => {
+        pool.query(sql, params, (err, res) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res);
+        });
+    });
 }
 
 const getProgram = async (id=null) => {

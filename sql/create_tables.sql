@@ -62,8 +62,6 @@ CREATE OR REPLACE VIEW vprogram_details AS(
         pri.program_description,
         pri.program_website,
         pri.program_focus,
-        pri.program_created_at,
-        pri.program_updated_at,
         d.department_id,
         d.department_name,
         o.organization_id,
