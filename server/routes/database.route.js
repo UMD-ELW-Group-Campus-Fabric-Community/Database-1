@@ -9,10 +9,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/programs/:id', controller.getProgram);
-router.get('/programs', controller.getAllPrograms);
+router.get('/programs', controller.getProgram);
 
 router.get('/articles/:id', controller.getArticle);
-router.get('/articles', controller.getAllArticles);
+router.get('/articles', controller.getArticle);
 
 
 module.exports = router;

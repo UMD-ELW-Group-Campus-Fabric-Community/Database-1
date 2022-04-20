@@ -24,7 +24,7 @@ WORKDIR /usr/src/app/server
 #     npm install n -g && \
 #     n latest
 
-RUN npm install express body-parser pg
+RUN npm install express body-parser pg@8.7.1
     
 CMD [ "node" , "index.js" ]
 

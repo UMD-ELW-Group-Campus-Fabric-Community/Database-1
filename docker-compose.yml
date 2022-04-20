@@ -1,40 +1,29 @@
 version: '3.7'
 
 services:
-  database-api:
+  coop_api:
     image: node:latest
-    container_name: database-api
+    container_name: coop_api
     restart: always
     build: 
       context: ./
-      dockerfile: Dockerfile.server
+      dockerfile: dockerfiles/Dockerfile.dev.server
     links:
-      - db
-    environment:
-      - HOST_PORT=8000
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASS=post1234
-      - DB_NAME=wcfc_db
-
+      - coop_db
+    env_file:
+      - ./envfiles/server.dev.env
     ports:
       - "1433:8000"
-    
 
-  db:
+  coop_db:
     image: postgres:12
-    container_name: db
+    container_name: coop_db
     restart: always
     build: 
       context: ./
-      dockerfile: Dockerfile.db
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=post1234
-      - POSTGRES_DB=wcfc_db
-      - DB_USER=admin
-      - DB_PASS=post1234
+      dockerfile: dockerfiles/Dockerfile.dev.db
+    env_file:
+      - ./envfiles/db.dev.env
     logging:
       options:
         max-size: '10m'
@@ -43,11 +32,3 @@ services:
       # Copy SQL files to the container at build time
       - ./sql/:/docker-entrypoint-initdb.d/
 
-volumes:
-  pgdata:
-    driver: local
-  pgconf:
-    driver: local
-  pglog: 
-    driver: local
-  

@@ -14,7 +14,7 @@ const db = {
         // Number of milliseconds before a request for a connection times out.
             connectionTimeoutMillis?: number;
     */
-    idleTimeoutMillis: 5000,
-    connectionTimeoutMillis: 10000
+    idleTimeoutMillis: 0,
+    connectionTimeoutMillis: 0
 }
 module.exports = db;
