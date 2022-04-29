@@ -3,7 +3,7 @@ const db = require('../services/database.service');
 const getProgram = async (req, res, next) => {
     try{
         const result = await db.getProgram(
-            req.params.id?req.params.id:null
+            req.params.program_name?req.params.program_name:null
         );
         if (result.rows.length > 0){
             res.status(200).json({
@@ -29,7 +29,7 @@ const getProgram = async (req, res, next) => {
 const getArticle = async (req, res, next) => {
     try{
         const result = await db.getArticle(
-            req.params.id?req.params.id:null
+            req.params.article_title?req.params.article_title:null
         );
         if (result.rows.length > 0){
             res.status(200).json({
@@ -51,7 +51,6 @@ const getArticle = async (req, res, next) => {
         return;
     }
 }
-
 
 module.exports = {
     getProgram,

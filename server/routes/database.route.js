@@ -8,10 +8,10 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/programs/:id', controller.getProgram);
+router.get('/programs/:program_name', controller.getProgram);
 router.get('/programs', controller.getProgram);
 
-router.get('/articles/:id', controller.getArticle);
+router.get('/articles/:article_title', controller.getArticle);
 router.get('/articles', controller.getArticle);
 
 

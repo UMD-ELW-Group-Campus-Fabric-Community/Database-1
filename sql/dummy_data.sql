@@ -5,10 +5,10 @@ INSERT INTO Organization (organization_name, organization_website)
 VALUES ('Sally', 'www.sally.com');
 
 -- Create User
-INSERT INTO User_Information (user_fname, user_lname, user_password, user_email, user_phone, organization_id, user_level)
-VALUES ('Billie', 'Jean', 'admin', 'test@bob.com', '1234567890', 1, 'admin');
-INSERT INTO User_Information (user_fname, user_lname, user_password, user_email, user_phone, organization_id, user_level)
-VALUES ('Tracy', 'Chapman', 'user', 'test@saly.com', '1234567890', 2, 'user');
+INSERT INTO User_Information (user_fname, user_lname, user_password, user_biography, user_picture, user_email, user_phone, organization_id, user_level)
+VALUES ('Billie', 'Jean', 'admin', 'biography text', 'picture url', 'test@bob.com', '1234567890', 1, 'admin');
+INSERT INTO User_Information (user_fname, user_lname, user_password, user_biography, user_picture, user_email, user_phone, organization_id, user_level)
+VALUES ('Tracy', 'Chapman', 'user', 'biography text', 'picture url', 'test@saly.com', '1234567890', 2, 'user');
 
 -- Create Impropper User
 -- INSERT INTO User_Information (username, user_password, user_email, user_phone, organization_id, user_level)
@@ -22,12 +22,12 @@ VALUES ('Department of Computer Science', 2);
 
 -- Create Program_Information
 INSERT INTO Program_Information (program_name, program_description, program_website, program_focus, department_id)
-VALUES ('<Program Name>', '<Program Description>', 'www.bob.com', '{
+VALUES ('<Program 1 Name>', '<Program Description>', 'www.bob.com', '{
     "Programming",
     "Math"
 }', 1);
 INSERT INTO Program_Information (program_name, program_description, program_website, program_focus, department_id)
-VALUES ('<Program Name>', '<Program Description>', 'www.sally.com', '{
+VALUES ('<Program 2 Name>', '<Program Description>', 'www.sally.com', '{
     "Programming",
     "Math"
 }', 2);

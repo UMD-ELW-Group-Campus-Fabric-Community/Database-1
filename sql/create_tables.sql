@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS User_Information(
     user_password VARCHAR(50) NOT NULL,
     user_email VARCHAR(50) NOT NULL,
     user_phone VARCHAR(50) NOT NULL,
+    user_biography VARCHAR(500),
+    user_picture TEXT,
     organization_id INTEGER NOT NULL,
     user_level VARCHAR(50) NOT NULL,
     FOREIGN KEY (organization_id) REFERENCES Organization(organization_id)
@@ -83,6 +85,8 @@ CREATE OR REPLACE VIEW varticles AS (
         u.user_id,
         u.user_fname,
         u.user_lname,
+        user_biography,
+        user_picture,
         a.article_id,
         a.article_title,
         a.article_content,

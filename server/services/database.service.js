@@ -22,11 +22,11 @@ const query = (sql, params) => {
     })
 };
 
-const getProgram = async (id=null) => {
+const getProgram = async (program_name=null) => {
     try{
-        if (id != null){              
-            const sql = `SELECT * FROM vprogram_details WHERE program_id = $1`;
-            return await query(sql, [id]);  
+        if (program_name != null){              
+            const sql = `SELECT * FROM vprogram_details WHERE program_name = $1`;
+            return await query(sql, [program_name]);  
         }
         const sql = `SELECT * FROM vprogram_details`;
         const res = await query(sql);
@@ -38,11 +38,11 @@ const getProgram = async (id=null) => {
     }
 }
 
-const getArticle = async (id=null) => {
+const getArticle = async (article_title=null) => {
     try{
-        if (id != null){
-            const sql = `SELECT * FROM varticles WHERE article_id = $1`;
-            return await query(sql, [id]);
+        if (article_title != null){
+            const sql = `SELECT * FROM varticles WHERE article_title = $1`;
+            return await query(sql, [article_title]);
         }
         const sql = `SELECT * FROM varticles`;
         const res = await query(sql);
