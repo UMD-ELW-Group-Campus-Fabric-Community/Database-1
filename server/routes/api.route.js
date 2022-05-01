@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controller/database.controller');
+const controller = require('../controller/api.controller');
 
 router.get('/', (req, res) => {
     res.status(200).json({

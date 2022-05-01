@@ -16,15 +16,7 @@ COPY ./server/ ./server/
 WORKDIR /usr/src/app/server
 
 # install dependencies
-# RUN curl -sL https://deb.nodesource.com/setup | sudo bash - && \
-#     apt-get install -yq nodejs build-essential && \
-#     npm install -g npm
-
-# RUN npm install npm@latest -g && \
-#     npm install n -g && \
-#     n latest
-
-RUN npm install express body-parser pg@8.7.1
+RUN npm install express body-parser pg@8.7.1 cors
     
 CMD [ "node" , "index.js" ]
 

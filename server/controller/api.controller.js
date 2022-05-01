@@ -1,8 +1,8 @@
-const db = require('../services/database.service');
+const api = require('../services/api.service');
 
 const getProgram = async (req, res, next) => {
     try{
-        const result = await db.getProgram(
+        const result = await api.fetchProgram(
             req.params.program_name?req.params.program_name:null
         );
         if (result.rows.length > 0){
@@ -28,7 +28,7 @@ const getProgram = async (req, res, next) => {
 
 const getArticle = async (req, res, next) => {
     try{
-        const result = await db.getArticle(
+        const result = await api.fetchArticle(
             req.params.article_title?req.params.article_title:null
         );
         if (result.rows.length > 0){
