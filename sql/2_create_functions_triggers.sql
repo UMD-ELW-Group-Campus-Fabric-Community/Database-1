@@ -72,3 +72,25 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER validate_phone_trigger 
 BEFORE INSERT OR UPDATE
 ON User_Information FOR EACH ROW EXECUTE PROCEDURE validate_phone();
+
+-- Function: Lookup Organization
+CREATE OR REPLACE FUNCTION lookup_organization()
+RETURNS trigger AS $$
+BEGIN
+    IF NEW.department_id IS NULL THEN 
+        NEW.department_id = (
+          SELECT department_id
+          FROM Department
+          WHERE department_name LIKE CONCAT('%', NEW.department_name , '%')           
+        );
+        RETURN NEW;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger: Lookup Organization
+CREATE TRIGGER lookup_organization_trigger
+BEFORE INSERT OR UPDATE
+ON Organization
+FOR EACH ROW EXECUTE PROCEDURE lookup_organization();

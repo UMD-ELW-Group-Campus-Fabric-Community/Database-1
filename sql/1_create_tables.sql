@@ -1,13 +1,23 @@
 -- Default Config
 SET timezone = 'UTC';
 
+
+-- Table: Department
+CREATE TABLE IF NOT EXISTS Department(
+    department_id SERIAL PRIMARY KEY,
+    department_name VARCHAR(50) NOT NULL
+);
+
 -- Table: Organization
 CREATE TABLE IF NOT EXISTS Organization(
     organization_id SERIAL PRIMARY KEY,
     organization_name VARCHAR(200) NOT NULL,
     organization_website VARCHAR(200) NOT NULL,
+    department_id INTEGER,
+    department_name VARCHAR(200),
     organization_created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    organization_updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+    organization_updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (department_id) REFERENCES Department(department_id)
 );
 
 -- Table: Privilege
@@ -27,7 +37,7 @@ CREATE TABLE IF NOT EXISTS User_Information(
     lastName VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     phone VARCHAR(50),
-    picture VARCHAR(200),
+    picture TEXT,
     biography VARCHAR(500),
     _password TEXT NOT NULL,
     _salt TEXT NOT NULL,
@@ -48,13 +58,6 @@ CREATE TABLE IF NOT EXISTS Auth(
     FOREIGN KEY (user_id) REFERENCES User_Information(id)
 );
 
--- Table: Department
-CREATE TABLE IF NOT EXISTS Department(
-    department_id SERIAL PRIMARY KEY,
-    department_name VARCHAR(50) NOT NULL,
-    organization_id INTEGER NOT NULL,
-    FOREIGN KEY (organization_id) REFERENCES Organization(organization_id)
-);
 
 -- Table: Program Information
 CREATE TABLE IF NOT EXISTS Program_Information(
@@ -62,9 +65,11 @@ CREATE TABLE IF NOT EXISTS Program_Information(
     program_name VARCHAR(50) NOT NULL,
     program_description TEXT NOT NULL,
     program_website VARCHAR(50) NOT NULL,
-    program_focus TEXT [] NOT NULL,
+    program_focus TEXT NOT NULL,
+    program_additional_info TEXT,
     program_created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     program_updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    program_image TEXT NOT NULL,
     department_id INTEGER NOT NULL,
     FOREIGN KEY (department_id) REFERENCES Department(department_id)
 );
@@ -72,10 +77,14 @@ CREATE TABLE IF NOT EXISTS Program_Information(
 -- Table: Article
 CREATE TABLE IF NOT EXISTS Articles(
     article_id SERIAL PRIMARY KEY,
-    article_title VARCHAR(50) NOT NULL,
+    article_title VARCHAR(100) NOT NULL,
+    article_picture TEXT NULL,
     article_content TEXT NOT NULL,
     article_created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     article_updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    user_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User_Information(id)
+    author VARCHAR(200) NOT NULL,
+    author_bio TEXT NOT NULL,
+    author_img TEXT,
+    organization_id INTEGER NOT NULL,
+    FOREIGN KEY (organization_id) REFERENCES Organization(organization_id)
 );
