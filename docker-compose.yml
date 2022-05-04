@@ -2,7 +2,7 @@ version: '3'
 
 services:
   coop_api:
-    image: node:latest
+    image: node:slim
     container_name: coop_api
     restart: always
     build: 
