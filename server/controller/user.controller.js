@@ -42,8 +42,21 @@ const _authenticateToken = async (req, res, next) => {
 
 const revalidateToken = async (req, res, next) => {
     try{
+        const authHeader = req.headers.authorization;
+        const token = authHeader && authHeader.split(' ')[1];
         const id = req.body.id;
+
+        console.log(token, id);
+        
+        if (token == null || id == null){
+            res.status(401).json({
+                message: 'Unauthorized'
+            });
+            return;
+        }
+
         const result = await auth.revalidateToken(
+            token,
             id
         );
         if (result.rows.length > 0){

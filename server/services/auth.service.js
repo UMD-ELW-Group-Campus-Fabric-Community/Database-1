@@ -11,9 +11,9 @@ const authenticateToken = async (token, id) => {
   }
 };
 
-const revalidateToken = async (id) => {
+const revalidateToken = async (id, token) => {
   try {
-    let sql = `UPDATE User_Information SET updated_at = NOW() WHERE id = $1`;
+    let sql = `UPDATE User_Information u SET u.updated_at = NOW() JOIN Auth a ON u.id = a.id WHERE u.id = $1 AND a.token = $2`;
     const res = await query(sql, [id]);
     if (res.rowCount > 0) {
       sql = `SELECT user_id, token, token_expiry FROM vauth WHERE id = $1`;
