@@ -7,7 +7,7 @@ services:
     restart: always
     build: 
       context: ./
-      dockerfile: dockerfiles/Dockerfile.dev.server
+      dockerfile: dockerfiles/Dockerfile.server
     links:
       - coop_db
     env_file:
@@ -21,7 +21,7 @@ services:
     restart: always
     build: 
       context: ./
-      dockerfile: dockerfiles/Dockerfile.dev.db
+      dockerfile: dockerfiles/Dockerfile.db
     env_file:
       - ./envfiles/db.dev.env
     logging:
