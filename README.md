@@ -8,16 +8,31 @@ The `Dockerfile.server` creates a server exposed port #PORT allowing for individ
 # Getting Started
 It is important to understand the difference between `docker-compose.yml` and a `Dockerfile`. A Dockerfile contains the commands that a user would call to create the service whereas Docker Compose is a tool for defining and running multi-container Docker application. 
 
-Dockerfile: 
+### Dockerfile: 
 - Defines a process, starts a server, runs some commands.
 
-Docker Compose:
+### Docker Compose:
 - Establishes relationship between containers
 - Creates/configures connections.
 - Imports environment variables
 
 # Configurations and Initilization
 Within the *envfiles* directory, there are two files which define environment variables required for the database to configure correctly and for the API to connect to the database. It is recommended that these environment variables are changed when moving into production. 
+
+In this parent directory, you will see a sub-directory called `sql/`. The `docker-compose` file is configured to take any sql files within this directory and execute them on initilization (note: they are execute in order, hence the numbers).
+
+# Server (API)
+
+The server file is broken into individual segments (e.g., controller, routes, services) that control individual functions. 
+
+### Controller
+The controller controls how parameters from the request are used to interact with the service. If the required parameters are not provided or the database does not have the information, an error is thrown. For instance, the database controller utilizes pre-written SQL and parameterizes information provided in the request body.
+
+### Routes
+The routes handles how individuals are entering the API. If a given protocal is not supported or the required URL parameters are not provided, an invalid request error will be triggered by default.
+
+### Services
+The services describe the resources available. For instance, the database service pools a connection allowing for multiple clients (or a single client) to connect and queries the sql provided.
 
 # Notes
 Incorporating this design requires the Servered approach for managing the relational database.
