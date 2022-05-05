@@ -34,6 +34,39 @@ The routes handles how individuals are entering the API. If a given protocal is 
 ### Services
 The services describe the resources available. For instance, the database service pools a connection allowing for multiple clients (or a single client) to connect and queries the sql provided.
 
+# Manually Adding Data
+
+If data cannot be added during the initialization state of the database, there's also the option of directly connecting to the Postgres DB through the SSH connection. The following code block demonstrates on adding a new record to a given table in the database using the bash terminal (this option is available to all environments).
+
+```bash
+# SSH into the AWS EC2 Instance
+ssh -i cert.pem ubuntu@3.215.148.52
+# Connect to the Postgres DB Container
+psql -U[user name] [database]
+```
+```sql
+-- Add a new article
+INSERT INTO Articles (
+    article_title, 
+    article_picture, 
+    article_content,
+    author,
+    author_bio,
+    author_img,
+    organization_id
+) VALUES (
+    'some article title',
+    'url:picture',
+    'some article text',
+    'John Smith',
+    'An iSchool studenet...',
+    'url:picture',
+    1
+);
+```
+Note: The change in code blocks illustrates a change in terminal support. Once connected to the Postgres DB, regular terminal commands will no longer work.
+
+
 # Notes
 Incorporating this design requires the Servered approach for managing the relational database.
 
