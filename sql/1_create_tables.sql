@@ -88,3 +88,19 @@ CREATE TABLE IF NOT EXISTS Articles(
     organization_id INTEGER NOT NULL,
     FOREIGN KEY (organization_id) REFERENCES Organization(organization_id)
 );
+
+-- Table: Inquiries
+CREATE TABLE IF NOT EXISTS Inquiries(
+    inquiry_id SERIAL PRIMARY KEY,
+    fname VARCHAR(50) NOT NULL,
+    lname VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL, 
+    message TEXT NOT NULL,
+    website VARCHAR(50),
+    phone VARCHAR(50),
+    budget VARCHAR(50),
+    poi VARCHAR(50),
+    timeframe VARCHAR(50),
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);

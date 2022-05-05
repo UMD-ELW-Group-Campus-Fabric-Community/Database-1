@@ -52,7 +52,34 @@ const getArticle = async (req, res, next) => {
     }
 }
 
+const postInquiry = async (req, res, next) => {
+    try{
+        const result = await api.postInquiry(
+            req.body.fname,
+            req.body.lname,
+            req.body.email,
+            req.body.name,
+            req.body.message,
+            req.body?.webiste,
+            req.body?.budget,
+            req.body?.phone,
+            req.body?.poi,
+            req.body?.timeframe,
+        );
+        res.status(200).json({
+            status: 200,
+            message: 'Inquiry submitted'
+        });
+        return;
+    } catch(err){
+        console.log(err);
+        res.status(500).json(err);
+        return;
+    }
+}
+
 module.exports = {
     getProgram,
-    getArticle
+    getArticle,
+    postInquiry
 };

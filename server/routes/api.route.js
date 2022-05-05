@@ -14,5 +14,6 @@ router.get('/programs', controller.getProgram);
 router.get('/articles/:article_title', controller.getArticle);
 router.get('/articles', controller.getArticle);
 
+router.post('/inquiry', controller.postInquiry);
 
 module.exports = router;

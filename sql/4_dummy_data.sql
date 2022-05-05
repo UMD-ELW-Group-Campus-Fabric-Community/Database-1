@@ -125,10 +125,6 @@ VALUES
             "src": "/icons/database.png"
         },
         {
-            "title": "Qualitative & Quantitative Analysis",
-            "src": "/icons/analysis.png"
-        },
-        {
             "title": "Business Analysis",
             "src": "/icons/analysis.png"
         }
