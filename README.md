@@ -66,8 +66,18 @@ INSERT INTO Articles (
 ```
 Note: The change in code blocks illustrates a change in terminal support. Once connected to the Postgres DB, regular terminal commands will no longer work.
 
-
 # Notes
 Incorporating this design requires the Servered approach for managing the relational database.
 
 This repository is the basis for the routes outlined in the NextJS fullstack application. The repository for that project can be found under the Community Repository section or [here](https://github.com/UMD-ELW-Group-Campus-Fabric-Community/Website).
+
+# File Structure Breakdown
+```
+database
+  dockerfiles (individual docker files)
+  envfiles (configuration files for docker container)
+  server (route, controller, and db connection manager)
+  sql (sql ran on startup)
+  docker-compose.yml (docker deployment)
+  
+  ```
